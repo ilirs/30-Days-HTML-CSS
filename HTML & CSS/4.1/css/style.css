@@ -1,0 +1,25 @@
+body
+{
+	font-family: sans-serif;
+	margin-top: 110px;
+}
+
+li
+{
+	display: inline;
+	padding-right: 10px;
+
+	
+}
+
+ul a
+{
+	text-decoration: none;
+}
+
+ul a:hover 
+{
+	color: black;
+	text-decoration: underline;
+
+}
