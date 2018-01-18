@@ -1,0 +1,58 @@
+body
+{
+	margin: auto;
+	width: 600px;
+	margin-top: 20px;
+}
+
+
+article img
+{
+	float:left;
+	margin-right: 20px;
+}
+
+.preview
+{
+	float:right;
+	width: 380px;
+}
+
+.meta
+{
+	padding-left: 0;
+	margin-top: 0;
+}
+
+.meta li
+{
+	display: inline;
+	text-decoration: none;
+}
+
+a 
+{
+	font-style: italic;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.meta li:after
+{
+	content: '\\';
+	padding:0 2px;
+}
+h2
+{
+	margin-top: 5px;
+}
+
+a:hover
+{
+	color: black;
+}
+.read
+{
+	float: right;
+}
+
