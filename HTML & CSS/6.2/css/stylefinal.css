@@ -1,0 +1,12 @@
+.banner
+{
+	background: url(images/image1.jpg) no-repeat;
+	width: 695px;
+	height: 231px;
+}
+
+header h1
+{
+	background: url(images/logo.png) no-repeat;
+	text-indent: -9999px;
+}
