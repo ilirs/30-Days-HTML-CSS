@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="">		
+		var brojString= "2*5+3-4/8+5+10*2*3+4-5+0.5+2*4*2+125";
+
+		function stringnumbertoarray(s)
+   		{
+      var calculation = [],
+        current = '';
+        for (var i = 0, ch; ch = s.charAt(i); i++) {
+            if ('^*/+-'.indexOf(ch) > -1) {
+                 if (current == '' && ch == '-') {
+                current = '-';
+            } else {
+                calculation.push(parseFloat(current), ch);
+                current = '';
+            }
+        } else {
+            current += s.charAt(i);
+        }
+    }
+    if (current != '') {
+        calculation.push(parseFloat(current));
+    }
+    return calculation;
+ 		}
+
+ 		function divMulti(numberarr)
+ 		{
+ 			var temparr=numberarr.slice();
+      var tt,temp=0,first;
+ 		
+ 			for(var i=2; i<numberarr.length; i=i+2)
+ 			    {
+ 					if(numberarr[i-1]=="*")
+          {
+ 						if(temp==0){
+                temp=numberarr[i-2];
+              }
+            if(numberarr[i] != "*"){
+  				  tt=numberarr[i] * temp;
+            for(var j=0; j<temparr.length; j++){
+              if(temparr[j]=="*"){
+                first=j-1;
+                break;
+              }
+            }
+            temparr.splice(first,3, tt);
+  				  temp=tt;
+					}
+				}
+
+        else if(numberarr[i-1]=="/"){
+          if(temp==0){
+                temp=numberarr[i-2];
+              }
+          if(numberarr[i] != "*"){
+            tt=temp/numberarr[i];
+            for(var j=0; j<temparr.length; j++){
+              if(temparr[j]=="/"){
+                first=j-1;
+                break;
+              }
+            }
+            temparr.splice(first,3, tt);
+            temp=tt;
+          }
+        }
+ 			  else{
+ 				temp=0;
+ 			  }
+ 		}
+ 		return temparr;
+ 	} 		
+function total(tempa)
+{    
+            var total=tempa[0];
+            for (var i = 2; i < tempa.length; i=i+2){
+              
+                if (tempa[i-1]=="+"){
+                        total=total+tempa[i];              
+                }                         
+                else{
+                     total=total- tempa[i];  
+                }         
+            }
+            total = parseFloat(total);
+            return total;
+}
+      var tot= total(divMulti(stringnumbertoarray(brojString)));
+      console.log(divMulti(stringnumbertoarray(brojString)));
+      console.log(tot);         
+	</script>
+</body>
+</html>
