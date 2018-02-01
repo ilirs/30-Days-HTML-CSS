@@ -34,7 +34,7 @@
   <div class="row">
      <input type="button"  onclick="numBtn(this.value)" value="0"/>
      <input type="button" onclick="numBtn(this.value)" value="."/>
-     <input id="equals" type="button"  onclick="functioncalculation(calculation)" value="="/>
+     <input id="equals" type="button"  onclick="total(divMulti(calculation))" value="="/>
      <input type="button" onclick="operator(this.value)" value="/"/>
 </div>
 </div>
@@ -47,6 +47,7 @@
         function addTocalculation(input)
         {
             calculation.push(input);
+
         }
 
         function clearAll()
@@ -58,6 +59,7 @@
 
         function numBtn(arg)
         {
+          
             input += arg;
             document.getElementById("total").innerHTML += arg;
         }
@@ -66,51 +68,82 @@
             if (input !== 0) 
             {
                 input = parseFloat(input);
-                addTocalculation(input);    //se stai od tuka zatoa sto ako se vnesuva dvocifren broj od numBtn nema da moze ke gi zema kako 
-                addTocalculation(arg);      //dve broevi.
+                addTocalculation(input);     
+                addTocalculation(arg);      
                 document.getElementById("total").innerHTML +=arg;
                 input = 0;
             }
         }
 
-         function functioncalculation(value)
-        {
-            if (input !==0) 
-
+              function divMulti(numberarr)
+    {
+       if (input !==0) 
             {
-            input = parseFloat(input);   //if statement za da go vnese vo calculation brojot posle operatorot
+            input = parseFloat(input);   
                 addTocalculation(input);
             }
 
-            var total = value[0];
-           
-            for (  var i = 2; i < value.length; i= i+2) {
-
-
-                if (calculation[i-1]=='+') {
-                        total+= value[i];       //so caluclation[i-1] se zema operatorot (+ - * /), vo calculation[2] se naogja brojot posle
-                       }                         //operatorot na primer: 125+22  vo calculation[2]= 22 dodeka caluclation[i-1]= +
-                else if(calculation[i-1]=='-')
-                {
-                     total-= value[i];
-                    
-                }
-                else if(calculation[i-1]=='/')
-                    {
-                        total /= value[i];
-                    }
-                else if(calculation[i-1]=='*')
-                    total *= value[i];
-                      
-                }
-
-            total = parseFloat(total);
-
-            document.getElementById("total").innerHTML =  total ;
-            input = total;
-            calculation = [];
+      var temparr=numberarr.slice();
+      var tt,temp=0,first;
+    
+      for(var i=2; i<numberarr.length; i=i+2)
+          {
+          if(numberarr[i-1]=="*")
+          {
+            if(temp==0){
+                temp=numberarr[i-2];
+              }
+            if(numberarr[i] != "*"){
+            tt=numberarr[i] * temp;
+            for(var j=0; j<temparr.length; j++){
+              if(temparr[j]=="*"){
+                first=j-1;
+                break;
+              }
+            }
+            temparr.splice(first,3, tt);
+            temp=tt;
+          }
         }
-</script>
 
+        else if(numberarr[i-1]=="/"){
+          if(temp==0){
+                temp=numberarr[i-2];
+              }
+          if(numberarr[i] != "*"){
+            tt=temp/numberarr[i];
+            for(var j=0; j<temparr.length; j++){
+              if(temparr[j]=="/"){
+                first=j-1;
+                break;
+              }
+            }
+            temparr.splice(first,3, tt);
+            temp=tt;
+          }
+        }
+        else{
+        temp=0;
+        }
+        }
+            return temparr;
+       }     
+      function total(tempa)
+      {    
+            var total=tempa[0];
+            for (var i = 2; i < tempa.length; i=i+2){
+              
+                if (tempa[i-1]=="+"){
+                        total=total+tempa[i];              
+                }                         
+                else{
+                     total=total- tempa[i];  
+                }         
+            }
+            total = parseFloat(total);
+            document.getElementById("total").innerHTML = total;  
+            return total;
+      }
+</script>
 </body>
 </html>
